@@ -1,0 +1,177 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <title>Canvas City</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <canvas></canvas>
+        <script>
+        	let width = 900,
+        		height = 500,
+        		PR = window.devicePixelRatio || 1,
+						scaledWidth = width*PR,
+						scaledHeight = height*PR,
+						base = 0;
+
+					let canvas = document.querySelectorAll("canvas")[0];
+					canvas.style.height = `${height}px`;
+					canvas.style.width = `${width}px`;
+					canvas.height = scaledHeight;
+					canvas.width = scaledWidth;
+
+					canvas.style.border = `1px solid gray`;
+
+					let context = canvas.getContext("2d");
+					context.scale(PR, PR);
+
+					let sky = context.createLinearGradient(0, 0, width, height);
+					sky.addColorStop(0, `hsla(67, 92%, 95%, 1)`);
+					sky.addColorStop(0.2, `hsla(193, 70%, 95%, 1)`);
+					sky.addColorStop(1, `hsla(193, 70%, 88%, 1)`);
+					context.fillStyle = sky;
+
+
+					// context.fillStyle = `hsla(193, 70%, 95%, 1)`;
+					context.fillRect(0, 0, width, height);
+
+					function build(){
+
+						let y = height - base,
+						h = Math.pow(Math.random(),6) * (height-base-40) + 20,
+						x = Math.random() * width,
+						w = Math.random() * 25 + 15;
+
+						// if(x < 300){
+						// 	h = Math.pow(Math.random(),6) * (height*0.3-base-40) + 20
+						// }else if(x < 600){
+						// 	h = Math.pow(Math.random(),3) * (height-base-40) + 20
+						// }
+
+						let CBDdist = Math.pow(Math.abs(x-CBD)/((Math.max(CBD, width-CBD)-20)),0.9);
+						console.log(CBDdist)
+						h = Math.pow(Math.random(),6) * ((height*(1-CBDdist))-base-20) + 20;
+
+						let ww = 3, wh = 10;
+						h = (+(h/wh).toFixed()) * wh;
+						w = (+(w/ww).toFixed()) * ww;
+
+						context.lineWidth = 0.5;
+						context.strokeStyle = "#212121";
+						
+						let colH = 197,
+							colS = Math.random()*30 + 30;
+						
+						context.fillStyle = `hsla(${colH}, ${colS}%, ${Math.random()*20 + 70}%, 1)`;
+
+						if(h < (height*0.25)){
+							w*=1.2;
+							colH = 43;
+							colS = 48;
+							context.fillStyle = `hsla(${colH}, 48%, ${Math.random() * 20 + 75}%, 1)`;
+							ww = 5;
+							w = (+(w/ww).toFixed()) * ww;
+						}
+
+						if(h > (height*0.5) & Math.random() < 0.2){
+							// context.beginPath();
+							// context.moveTo(x-w/2,y);
+							// context.lineTo(x-w/2,y-h);
+							// context.ellipse(x,y-h,w/2,w,0,Math.PI,2*Math.PI,0);
+							// context.lineTo(x+w/2,y);
+							// context.fill();
+							// context.stroke();
+						}else{
+							context.beginPath();
+							context.rect(x-w/2+1, y, w-1, -h);
+							context.fill();
+							context.stroke();
+
+							if(h > (height*0.35) & Math.random() > 0.2){
+								context.beginPath();
+								context.moveTo(x,y-h);
+								context.lineTo(x,y-h-(h/30));
+								context.stroke();
+							}
+						}
+
+						context.strokeStyle = "hsla(0, 0%, 50%, 1)";
+						context.lineWidth = 0.25;
+
+						// for(let r=0; r<h; r+=wh){
+						//  	context.beginPath();
+						//  	context.moveTo(x-w/2, height-r);
+						//  	context.lineTo(x+w/2, height-r);
+						// 	// context.rect(x, y, w, -h);
+						// 	// context.fill();
+						// 	context.stroke();
+						// }
+						// for(let c=0; c<w; c+=ww){
+						//  	context.beginPath();
+						//  	context.moveTo(x-w/2+c, y);
+						//  	context.lineTo(x-w/2+c, y-h);
+						// 	// context.rect(x, y, w, -h);
+						// 	// context.fill();
+						// 	context.stroke();
+						// }
+
+						for(let r=0; r<=h; r+=wh){
+							for(let c=0; c<w; c+=ww){
+								context.fillStyle = `hsla(${colH}, ${colS}%, ${85-c*0.8}%, 1)`;
+							 	context.fillRect(x-w/2+c, y-r, ww-0.5, wh-0.5);
+							}
+						}
+
+					}
+
+					function tree(){
+						let y = height - base,
+						h = Math.pow(Math.random(),4) * (25) + 10,
+						x = Math.random() * width,
+						w = Math.random() * 10 + 10;
+
+						context.strokeStyle = `hsla(38, 70%, ${Math.random() * 10 + 23}%, 1)`;
+						context.fillStyle = `hsla(103, 70%, ${Math.random() * 10 + 30}%, 0.8)`;
+
+						context.lineWidth = 2;
+						context.beginPath();
+						context.moveTo(x,y);
+						context.lineTo(x,y-h);
+						context.stroke();
+
+						context.beginPath();
+						context.arc(x, y-h, w/2, 0, 2 * Math.PI);
+						context.fill();
+					}
+
+					context.fillStyle = "darkblue";
+					context.fillRect(0, height, width, -base+2);
+
+					let buildings = [];
+					for(let i=0; i<100; i++){
+						buildings.push(base);
+					}
+
+					let CBD = Math.random() * (width-200) + 200;
+					// let CBD = 450;
+					context.font = "20px Avenir"
+					// context.fillText("CBD", CBD, 20);
+
+					// Comment out the setTimeout lines to generate cities instantly
+					buildings.map((d,i) => {
+						setTimeout(function(){
+							build(d);
+						},20*i);
+					});
+
+					for(let i=0; i<100; i++){
+						setTimeout(function(){
+							tree();
+						},2000+i*20);
+					}
+
+        </script>
+    </body>
+</html>

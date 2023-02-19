@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>City Builder</title>
+</head>
+
+<!-- Add audio? -->
+<body>
+
+    <main>
+
+        <h1 id="title">City Builder</h1> 
+
+
+        <section id="settings">
+
+            <h1>Settings</h1>
+
+            <div id="cityNameDiv">
+                <label>City Name:
+                    <input id="cityName" required minlength="0" maxlength="34" size="34">
+                </label>
+                <button id="cityNameEnter">Enter</button>
+            </div>
+            
+            <div id="populationDiv">
+                <label>population:
+                    <input type="range" id="populationSize" required min="100" max="10000">
+                    <h2 id="populationValue"></h2>
+                </label>
+                <button id="populationEnter">Enter</button>
+            </div>
+    
+            <section id="values">
+    
+                <div id="castleValueDiv">
+                    <label>Castle Value:
+                        <input type="range" id="castleValue" required min="0" max="200">
+                    </label>
+                </div>
+    
+                <div id="houseValueDiv">
+                    <label>House Value:
+                        <input type="range" id="houseValue" required min="0" max="200">
+                    </label>
+                </div>
+    
+                <div id="innValueDiv">
+                    <label>inn Value:
+                        <input type="range" id="innValue" required min="0" max="200">
+                    </label>
+                </div>
+    
+                <div id="blacksmithValueDiv">
+                    <label>blacksmith Value:
+                        <input type="range" id="blacksmithValue" required min="0" max="200">
+                    </label>
+                </div>
+    
+                <div id="carpenterValueDiv">
+                    <label>carpenter Value:
+                        <input type="range" id="carpenterValue" required min="0" max="200">
+                    </label>
+                </div>
+    
+                <div id="grocerValueDiv">
+                    <label>grocer Value:
+                        <input type="range" id="grocerValue" required min="0" max="200">
+                    </label>
+                </div>
+    
+                <div id="gGoodValueDiv">
+                    <label>General Goods Store Value:
+                        <input type="range" id="gGoodValue" required min="0" max="200">
+                    </label>
+                </div>
+    
+                <button id="enterValues">Enter Values</button>
+    
+            </section>
+    
+            <button id="createCity">Create City</button>
+
+        </section>
+
+        <section id="key">
+            
+            <h1>Key</h1>
+            
+            <h2 id="cityNameDisplay"></h2>
+            <!-- possibly generate below with js -->
+            <p id="castleNumberDisplay"> </p>
+            <div id="castleButtonDisplay"></div>
+            <div id="castleDisplay"></div>
+            
+            <p id="houseNumberDisplay"> </p>
+            <div id="houseButtonDisplay"></div>
+            <div id="houseDisplay"></div>
+
+            <p id="innNumberDisplay"> </p>
+            <div id="innButtonDisplay"></div>
+            <div id="innDisplay"></div>
+
+            <p id="blacksmithNumberDisplay"> </p>
+            <div id="blacksmithButtonDisplay"></div>
+            <div id="blacksmithDisplay"></div>
+
+            <p id="carpenterNumberDisplay"> </p>
+            <div id="carpenterButtonDisplay"></div>
+            <div id="carpenterDisplay"></div>
+
+            <p id="grocerNumberDisplay"> </p>
+            <div id="grocerButtonDisplay"></div>
+            <div id="grocerDisplay"></div>
+
+            <p id="gGoodNumberDisplay"> </p>
+            <div id="gGoodButtonDisplay"></div>
+            <div id="gGoodDisplay"></div>
+
+        </section>
+        
+    </main>
+<!-- temp -->
+    <script src="buttons.mjs" type="module"></script>
+    <script src="create_city.mjs" type="module"></script>
+    <script src="create_buttons.mjs" type="module"></script>
+    <script src="create_unique_buildings.mjs" type="module"></script>
+
+</body>
+
+</html>
